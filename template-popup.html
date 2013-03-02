@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <title>Later tabs</title>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="panel">
+    <header>
+    	<h1 class="title">Later tabs</h1>
+        <i class="icon-remove close" title="Close this panel"></i>
+        <div class="save-actions">
+            <input type="button" class="save_tab" id="save_current_tab_button" value="Save tab" />
+            <input type="button" class="save_all" id="save_all_tabs_button" value="Save all tabs" />
+        </div>
+    </header>
+    <section class="search">
+    	<input type="search" placeholder="Search saved tabs" />
+    </section>
+    <section class="saved-links">
+        <article>
+            <h2><a href="#">First link title</a></h2>
+            <i class="icon-trash delete" title="Delete saved tab"></i>
+        <footer>Saved X minutes ago</footer>
+        </article>
+        <article>
+            <h2><a href="#">Second link title has a long long title</a></h2>
+            <i class="icon-trash delete" title="Delete saved tab"></i>
+            <footer>Saved X minutes ago</footer>
+        </article>
+    <footer>
+        <i class="icon-cog" id="settings_button" title="Settings"></i>
+    </footer>
+    </section>
+    <script type="text/javascript" src="/js/latertabs.js"></script>
+</body>
+</html>
