@@ -1,6 +1,6 @@
 var LaterTabs = {
 
-    tabs: [],
+    tabs: {},
 
     init: function(){
         if (typeof localStorage.latertabs == 'undefined'){
@@ -17,6 +17,7 @@ var LaterTabs = {
         }
         LaterTabs.tabs[item.url] = item;
         localStorage.latertabs = JSON.stringify(LaterTabs.tabs);
+        return true;
     },
 
     remove: function(url){
@@ -68,9 +69,7 @@ var LaterTabs = {
 
 (function(){
     LaterTabs.init();
-    var tabList = LaterTabs.getSaved();
-
-    createList(tabList);
+    createList();
 
     var saveButton = document.getElementById('save_current_tab_button');
     var saveAllButton = document.getElementById('save_all_tabs_button');
