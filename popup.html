@@ -11,37 +11,16 @@
                 font-size: 12px;
                 padding: 10px;
             }
-            #result_area, #loading_area {
-                display: none;
-                text-align: center;
-            }
-            #input_area {
-                text-align: center;
-            }
-            #copy_button {
-                background: url(/images/copy_up.png) no-repeat;
-                border: 0;
-                width: 16px;
-                height: 16px;
-                position: absolute;
-                margin-top: 4px;
-            }
-            #copy_button:hover {
-                background: url(/images/copy_over.png) no-repeat;
-            }
-            #copy_button:active {
-                background: url(/images/copy_down.png) no-repeat;
-            }
-            #copied {
-                position: absolute;
-                margin-left: 20px;
-                margin-top: 4px;
-            }
         </style>
-        <script type="text/javascript" src="/js/latertabs.js"></script>
     </head>
-
     <body>
+        <input type="button" id="save_current_tab_button" value="Save current tab">
+        <input type="button" id="save_all_tabs_button" value="Save all tabs">
+
+        <h2>Later Tabs</h2>
         
+        <ul id="tab_list"></ul>
+
+        <script type="text/javascript" src="/js/latertabs.js"></script>
     </body>
 </html>
