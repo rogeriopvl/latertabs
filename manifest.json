@@ -1,0 +1,16 @@
+{
+    "manifest_version": 2,
+    "name":  "Later Tabs",
+    "version": "0.0.1",
+    "description": "Save for tabs for later reading",
+    "browser_action": {
+        "default_icon": "imgs/clock.png",
+        "default_title": "Later Tabs",
+        "default_popup": "popup.html"
+    },
+    "icons": {
+    },
+    "permissions": [
+        "tabs"
+    ]
+}
