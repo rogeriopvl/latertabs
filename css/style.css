@@ -106,6 +106,12 @@ article footer {
 }
 
 .icon-cog,
+.icon-remove,
+.icon-trash {
+    padding: 0.8em;
+}
+
+.icon-cog,
 .icon-remove {
     cursor: pointer;
 }
