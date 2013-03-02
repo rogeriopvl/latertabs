@@ -12,6 +12,10 @@
     "icons": {
     },
     "permissions": [
-        "tabs"
+        "tabs",
+        "notifications"
+    ],
+    "web_accessible_resources": [
+        "imgs/clock.png"
     ]
 }

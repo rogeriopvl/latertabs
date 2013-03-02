@@ -19,9 +19,19 @@ var LaterTabs = {
         localStorage.latertabs = JSON.stringify(LaterTabs.tabs);
     },
 
+    remove: function(url){
+        if (LaterTabs.tabs[url]){
+            delete LaterTabs.tabs[url];
+            LaterTabs.notify('Tab removed', url);
+            return true;
+        }
+        return false;
+    },
+
     saveCurrent: function(callback){
         chrome.tabs.getSelected(null, function(tab){
             LaterTabs.save({ url: tab.url, title: tab.title });
+            LaterTabs.notify('Tab saved', tab.url);
             if (callback){ callback(); }
         });
     },
@@ -31,18 +41,28 @@ var LaterTabs = {
             for (var i=0; i < tabs.length; i++){
                 LaterTabs.save({ url: tabs[i].url, title: tabs[i].title });
             }
+            LaterTabs.notify('All tabs saved', '');
             if (callback){ callback(); }
         });
     },
 
     restore: function(url){
         chrome.tabs.create({'url': url}, function(tab) {
-            console.log('Tab restored: ' + url);
+            LaterTabs.notify('Tab restored', url);
         });
     },
 
     getSaved: function(){
         return LaterTabs.tabs;
+    },
+
+    notify: function(title, text){
+        var notification = webkitNotifications.createNotification(
+            '/imgs/clock.png',
+            title,
+            text
+        );
+        notification.show();
     }
 };
 
@@ -54,6 +74,8 @@ var LaterTabs = {
 
     var saveButton = document.getElementById('save_current_tab_button');
     var saveAllButton = document.getElementById('save_all_tabs_button');
+    var settingsButton = document.getElementById('settings_button');
+    var deleteButtons = document.querySelector('.delete_button');
 
     saveButton.addEventListener('click', function(){
         LaterTabs.saveCurrent(createList);
@@ -63,11 +85,22 @@ var LaterTabs = {
         LaterTabs.saveAll(createList);
     });
 
+    settingsButton.addEventListener('click', function(){
+        chrome.tabs.create({ url: "options.html" });
+    });
+
+    /*for (var i in deleteButtons){
+        deleteButtons[i].addEventListener('click', function(){
+            LaterTabs.remove();
+        });
+    }*/
+
     function createList(){
         var items = LaterTabs.tabs,
             htmlContent = '';
         for (var i in items){
-            htmlContent += '<li>' + items[i].url + '</li>';
+            htmlContent += '<li>' + items[i].url + ' <a class="delete_button" href="#">';
+            htmlContent += 'Delete</a></li>';
         }
         document.getElementById('tab_list').innerHTML = htmlContent;
     }
