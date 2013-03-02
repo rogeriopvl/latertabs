@@ -56,6 +56,7 @@ input.save_all {
 
 .panel > footer {
     margin: 1em 0;
+    overflow: hidden;
 }
 
 .search input {
