@@ -1,0 +1,108 @@
+* {
+    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    font-size: 80%;
+}
+
+h1, h2, h3 {
+    display: inline-block;
+    margin: 0;
+}
+
+a {
+    color: rgb(17, 34, 204);
+}
+
+h1.title {
+    color: #333;
+    float: middle;
+}
+
+.close {
+    float: right;
+}
+
+input[type="button"] {
+    background-color: #fff;
+    border: 0;
+    cursor: pointer;
+}
+
+input.save_tab {
+    background-color: rgb(17, 34, 204);
+    border-radius: 0.8em;
+    color: #fff;
+    padding: 0.4em 0.8em;
+}
+
+input.save_all {
+    color: rgb(17, 34, 204);
+}
+
+.panel header,
+.search,
+.saved-links article {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.5em;
+}
+
+.panel header {
+    margin-bottom: 0.4em;
+}
+
+.search input {
+    width: 100%;
+}
+
+.saved-links article:hover {
+    background-color: #F0FFFF;
+}
+
+article {
+    padding: 1em 0.4em;
+    position: relative;
+}
+
+article h2 {
+    color: blue;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 80%;
+}
+
+article h2 a {
+    text-decoration: none;
+}
+
+article footer {
+    color: grey;
+}
+
+article .delete {
+    color: #999;
+    cursor: pointer;
+    position: absolute;
+    right: 0.4em;
+    text-decoration: none;
+}
+
+article .delete:hover {
+    color: red;
+}
+
+article footer {
+    font-size: 0.8em;
+}
+
+.icon-cog,
+.icon-remove {
+    cursor: pointer;
+}
+
+.icon-cog {
+    float: right;
+}
