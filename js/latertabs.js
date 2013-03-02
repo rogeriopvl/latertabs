@@ -99,9 +99,10 @@ var LaterTabs = {
         var items = LaterTabs.tabs,
             htmlContent = '';
         for (var i in items){
-            htmlContent += '<li>' + items[i].url + ' <a class="delete_button" href="#">';
-            htmlContent += 'Delete</a></li>';
+            htmlContent += '<article><h2><a href="#">';
+            htmlContent += items[i].title + '</a></h2>';
+            htmlContent += '<i class="icon-trash delete" title="Delete saved tab"></i>';
+            htmlContent += '<footer>' + items[i].url + '</footer></article>';
         }
-        document.getElementById('tab_list').innerHTML = htmlContent;
-    }
+        document.getElementById('tab_list').innerHTML = htmlContent; }
 })();
