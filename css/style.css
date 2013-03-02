@@ -14,7 +14,7 @@ h1, h2, h3 {
 }
 
 a {
-    color: rgb(17, 34, 204);
+    color: #4c59e6;
 }
 
 h1.title {
@@ -33,14 +33,14 @@ input[type="button"] {
 }
 
 input.save_tab {
-    background-color: rgb(17, 34, 204);
-    border-radius: 0.8em;
+    background-color: #4c59e6;
+    border-radius: 0.4em;
     color: #fff;
     padding: 0.4em 0.8em;
 }
 
 input.save_all {
-    color: rgb(17, 34, 204);
+    color: #4352ef;
 }
 
 .panel header,
@@ -54,12 +54,18 @@ input.save_all {
     margin-bottom: 0.4em;
 }
 
+.panel > footer {
+    margin: 1em 0;
+    overflow: hidden;
+}
+
 .search input {
+    padding: 0.4em 0;
     width: 100%;
 }
 
 .saved-links article:hover {
-    background-color: #F0FFFF;
+    background-color: #eceefd;
 }
 
 article {
@@ -68,7 +74,7 @@ article {
 }
 
 article h2 {
-    color: blue;
+    color:  #4c59e6;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -97,6 +103,12 @@ article .delete:hover {
 
 article footer {
     font-size: 0.8em;
+}
+
+.icon-cog,
+.icon-remove,
+.icon-trash {
+    padding: 0.8em;
 }
 
 .icon-cog,
