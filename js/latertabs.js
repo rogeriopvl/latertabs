@@ -11,18 +11,23 @@ var LaterTabs = {
         }
     },
 
+    syncStorage: function(){
+        localStorage.latertabs = JSON.stringify(LaterTabs.tabs);
+    },
+
     save: function(item){
         if (LaterTabs.tabs[item.url]){
             return false;
         }
         LaterTabs.tabs[item.url] = item;
-        localStorage.latertabs = JSON.stringify(LaterTabs.tabs);
+        LaterTabs.syncStorage();
         return true;
     },
 
     remove: function(url){
         if (LaterTabs.tabs[url]){
             delete LaterTabs.tabs[url];
+            LaterTabs.syncStorage();
             LaterTabs.notify('Tab removed', url);
             return true;
         }
@@ -71,10 +76,15 @@ var LaterTabs = {
     LaterTabs.init();
     createList();
 
+    var closeButton = document.getElementById('close_button');
     var saveButton = document.getElementById('save_current_tab_button');
     var saveAllButton = document.getElementById('save_all_tabs_button');
     var settingsButton = document.getElementById('settings_button');
-    var deleteButtons = document.querySelector('.delete_button');
+    var deleteButtons = document.getElementsByClassName('delete_button');
+
+    closeButton.addEventListener('click', function(){
+        window.close();
+    });
 
     saveButton.addEventListener('click', function(){
         LaterTabs.saveCurrent(createList);
@@ -88,11 +98,12 @@ var LaterTabs = {
         chrome.tabs.create({ url: "options.html" });
     });
 
-    /*for (var i in deleteButtons){
+    for (var i = 0; i < deleteButtons.length; i++){
         deleteButtons[i].addEventListener('click', function(){
-            LaterTabs.remove();
+            LaterTabs.remove(this.nextSibling.innerHTML);
+            createList(); // quick hack to update list
         });
-    }*/
+    }
 
     function createList(){
         var items = LaterTabs.tabs,
@@ -100,7 +111,7 @@ var LaterTabs = {
         for (var i in items){
             htmlContent += '<article><h2><a href="#">';
             htmlContent += items[i].title + '</a></h2>';
-            htmlContent += '<i class="icon-trash delete" title="Delete saved tab"></i>';
+            htmlContent += '<i class="delete_button icon-trash delete" title="Delete saved tab"></i>';
             htmlContent += '<footer>' + items[i].url + '</footer></article>';
         }
         document.getElementById('tab_list').innerHTML = htmlContent; }
