@@ -32,6 +32,10 @@ input[type="button"] {
     cursor: pointer;
 }
 
+input[type="button"]:focus {
+    outline: none;
+}
+
 input.save_tab {
     background-color: #4c59e6;
     border-radius: 0.4em;
