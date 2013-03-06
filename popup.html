@@ -3,28 +3,16 @@
 <head>
 	<meta charset="UTF-8">
     <title>Later tabs</title>
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/flat-ui.css" />
 </head>
-<body class="panel">
-    <header>
-    	<h1 class="title">Later tabs</h1>
-        <i id="close_button" class="icon-remove close" title="Close this panel"></i>
-        <div class="save-actions">
-            <input type="button" class="save_tab" id="save_current_tab_button" value="Save tab" />
-            <input type="button" class="save_all" id="save_all_tabs_button" value="Save all tabs" />
+<body>
+    <div id="main" class="todo mrm">
+        <div class="todo-search">
+            <input class="todo-search-field" type="search" value placeholder="Search">
         </div>
-    </header>
-    <!--
-    <section class="search">
-    	<input type="search" placeholder="Search saved tabs" />
-    </section>
-    -->
-    <section id="tab_list" class="saved-links">
-    </section>
-    <footer>
-        <i class="icon-cog" id="settings_button" title="Settings"></i>
-    </footer>
+        <ul id="tab_list"></ul>
+    </div>
     <script type="text/javascript" src="/js/latertabs.js"></script>
 </body>
 </html>
