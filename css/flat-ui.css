@@ -199,9 +199,9 @@ h3 {
   margin-top: 2px; }
 
 h4 {
-  font-size: 18px;
-  font-weight: 500;
-  margin-top: 4px;
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 4px;
     text-overflow: ellipsis;
     white-space: nowrap;
     width: 80%;
@@ -1749,16 +1749,21 @@ textarea,
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 3 / 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 2) {
   .tile.tile-hot:before {
     background-image: url("../images/tile/ribbon-2x.png"); } }
+
 .todo {
   background-color: #2c3e50;
-  border-radius: 8px 8px 6px 6px;
+  /*border-radius: 8px 8px 6px 6px;*/
   color: #6285a8;
-  margin-bottom: 20px; }
-  .todo ul {
+  margin-bottom: 20px;
+}
+
+.todo ul {
     margin: 0;
-    list-style-type: none; }
-  .todo li {
-    background: #34495e url("../imgs/todo/todo.png") 92% center no-repeat;
+    list-style-type: none;
+}
+
+.todo li {
+    background: #34495e 92% center no-repeat;
     background-size: 20px 20px;
     cursor: pointer;
     margin-top: 2px;
@@ -1770,79 +1775,112 @@ textarea,
     -moz-transition: 0.25s;
     -o-transition: 0.25s;
     transition: 0.25s;
-    -webkit-backface-visibility: hidden; }
-    .todo li:first-child {
-      margin-top: 0; }
-    .todo li:last-child {
-      border-radius: 0 0 6px 6px;
-      padding-bottom: 18px; }
-    .todo li.todo-done {
-      background: transparent url("../imgs/todo/done.png") 92% center no-repeat;
-      background-size: 20px 20px;
-      color: #1abc9c; }
-      .todo li.todo-done .todo-name {
-        color: #1abc9c; }
+    -webkit-backface-visibility: hidden;
+}
+
+.todo li:first-child {
+    margin-top: 0;
+}
+
+.todo li:last-child {
+    /*border-radius: 0 0 6px 6px;*/
+    padding-bottom: 18px;
+}
+
+.todo li:hover {
+    background: transparent 92% center no-repeat;
+    background-size: 20px 20px;
+    color: #1abc9c;
+}
+
+.todo li.todo-done .todo-name {
+    color: #1abc9c;
+}
 
 .todo-search {
-  background: #1abc9c url("../imgs/todo/search.png") 92% center no-repeat;
-  background-size: 16px 16px;
-  border-radius: 6px 6px 0 0;
-  color: #34495e;
-  padding: 19px 25px 20px; }
+    background: #1abc9c url("../imgs/todo/search.png") 92% center no-repeat;
+    background-size: 16px 16px;
+    /*border-radius: 6px 6px 0 0;*/
+    color: #34495e;
+    padding: 19px 25px 20px;
+}
 
 input.todo-search-field {
-  background: none;
-  border: none;
-  color: #34495e;
-  font-size: 19px;
-  font-weight: 700;
-  margin: 0;
-  line-height: 23px;
-  padding: 5px 0;
-  text-indent: 0;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none; }
-  input.todo-search-field:-moz-placeholder {
-    color: #34495e; }
-  input.todo-search-field::-webkit-input-placeholder {
-    color: #34495e; }
-  input.todo-search-field.placeholder {
-    color: #34495e; }
+    background: none;
+    border: none;
+    color: #34495e;
+    font-size: 19px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 23px;
+    padding: 5px 0;
+    text-indent: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+input.todo-search-field:-moz-placeholder {
+    color: #34495e;
+}
+
+input.todo-search-field::-webkit-input-placeholder {
+    color: #34495e;
+}
+
+input.todo-search-field.placeholder {
+    color: #34495e;
+}
 
 .todo-icon {
-  float: left;
-  font-size: 24px;
-  padding: 11px 22px 0 0; }
+    float: left;
+    font-size: 24px;
+    padding: 11px 22px 0 0;
+}
 
 .todo-content {
-  padding-top: 1px;
-  overflow: hidden; }
+    padding-top: 1px;
+    overflow: hidden;
+}
 
 .todo-name {
-  color: white;
-  font-size: 17px;
-  margin: 1px 0 3px; }
+    color: white;
+    font-size: 17px;
+    margin: 1px 0 3px;
+}
+
+/* added by me */
+.todo-button-area {
+    padding: 20px;
+}
+
+/* end of added by me */
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 3 / 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 2) {
-  .todo li {
-    background-image: "../imgs/todo/todo-2x.png"; }
-    .todo li.todo-done {
-      background-image: "../imgs/todo/done-2x.png"; }
+    .todo li {
+    background-image: "../imgs/todo/todo-2x.png";
+    }
 
-  .todo-search {
-    background-image: "../imgs/todo/search-2x.png"; } }
+    .todo li.todo-done {
+        background-image: "../imgs/todo/done-2x.png";
+    }
+
+    .todo-search {
+        background-image: "../imgs/todo/search-2x.png";
+    }
+}
+
 footer {
-  background-color: #eceff1;
-  color: #bdc1c5;
-  font-size: 15px;
-  padding: 0; }
-  footer a {
-    color: #a1a4a7;
-    font-weight: 700; }
-  footer p {
+    background-color: #eceff1;
+    color: #bdc1c5;
     font-size: 15px;
-    line-height: 20px; }
+padding: 0; }
+footer a {
+    color: #a1a4a7;
+font-weight: 700; }
+footer p {
+    font-size: 15px;
+line-height: 20px; }
 
 .footer-title {
   margin: 0 0 22px;
