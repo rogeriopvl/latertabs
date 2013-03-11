@@ -13,7 +13,8 @@
     },
     "permissions": [
         "tabs",
-        "notifications"
+        "notifications",
+        "storage"
     ],
     "web_accessible_resources": [
         "imgs/clock.png"
