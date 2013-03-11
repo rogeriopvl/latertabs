@@ -118,10 +118,11 @@ var LaterTabs = {
             htmlContent = '';
         for (var i in items){
             if (items.hasOwnProperty(i)){
-                htmlContent += '<article><h2><a href="' + items[i].url + '">';
-                htmlContent += items[i].title + '</a></h2>';
-                htmlContent += '<i class="delete_button icon-trash delete" title="Delete saved tab"></i>';
-                htmlContent += '<footer>' + items[i].url + '</footer></article>';
+                htmlContent += '<li class="todo">';
+                htmlContent += '<div class="todo-icon fui-time-24"></div>';
+                htmlContent += '<div class="todo-content">';
+                htmlContent += '<h4 class="todo-name">' + items[i].title + '</h4>';
+                htmlContent += ' ' + items[i].url + '</div></li>';
             }
         }
         document.getElementById('tab_list').innerHTML = htmlContent;
