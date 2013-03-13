@@ -8,9 +8,17 @@
 </head>
 <body>
     <div id="main" class="todo mrm">
-        <div class="todo-search">
-            <input class="todo-search-field" type="search" value placeholder="Search">
+
+        <div class="todo-button-area">
+            <div id="save_tab_button" class="divisor item1"><span class="settings_btn_16 pull-left fui-checkmark-16"></span>Save tab</div>
+            <div id="save_all_button" class="divisor item2"><span class="settings_btn_16 pull-left fui-checkround-24"></span>Save all tabs</div>
+            <div id="settings_button" class="divisor item3"><span class="settings_btn_16a pull-right fui-settings-24"></span>Settings</div>
         </div>
+
+        <div class="todo-search">
+            <input class="todo-search-field" type="search" value="" placeholder="Search">
+        </div>
+
         <ul id="tab_list"></ul>
     </div>
     <script type="text/javascript" src="/js/latertabs.js"></script>

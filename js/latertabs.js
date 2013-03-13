@@ -78,15 +78,10 @@ var LaterTabs = {
     LaterTabs.init(createList);
 
     function setupListeners(){
-        var closeButton = document.getElementById('close_button');
-        var saveButton = document.getElementById('save_current_tab_button');
-        var saveAllButton = document.getElementById('save_all_tabs_button');
+        var saveButton = document.getElementById('save_tab_button');
+        var saveAllButton = document.getElementById('save_all_button');
         var settingsButton = document.getElementById('settings_button');
-        var tablist = document.getElementsByTagName('article');
-
-        closeButton.addEventListener('click', function(){
-            window.close();
-        });
+        var tablist = document.getElementsByTagName('li');
 
         saveButton.addEventListener('click', function(){
             LaterTabs.saveCurrent(createList);
@@ -101,14 +96,20 @@ var LaterTabs = {
         });
 
         for (var i = 0, tlength = tablist.length; i < tlength; i++){
-            var deleteButton = tablist[i].getElementsByTagName('i')[0];
-            deleteButton.addEventListener('click', function(){
-                LaterTabs.remove(this.nextSibling.innerHTML);
-                createList(); // quick hack to update list
+
+            tablist[i].addEventListener('click', function(){
+                var tabURL = this.getElementsByTagName('p')[0].innerHTML;
+                console.log(tabURL);
+                LaterTabs.restore(tabURL);
             });
 
-            tablist[i].children[0].addEventListener('click', function(){
-                LaterTabs.restore(deleteButton.nextSibling.innerHTML);
+            var deleteButton = tablist[i].getElementsByClassName('fui-cross-16')[0];
+            deleteButton.addEventListener('click', function(e){
+                e.stopPropagation();
+                var tabURL = this.previousSibling.children[1].innerHTML;
+                console.log(tabURL);
+                LaterTabs.remove(tabURL);
+                createList(); // quick hack to update list
             });
         }
     }
@@ -121,8 +122,9 @@ var LaterTabs = {
                 htmlContent += '<li class="todo">';
                 htmlContent += '<div class="todo-icon fui-time-24"></div>';
                 htmlContent += '<div class="todo-content">';
-                htmlContent += '<h4 class="todo-name">' + items[i].title + '</h4>';
-                htmlContent += ' ' + items[i].url + '</div></li>';
+                htmlContent += '<h4 class="todo-name elps">' + items[i].title + '</h4>';
+                htmlContent += '<p class="elps">' + items[i].url + '</p></div>';
+                htmlContent += '<div class="settings_btn_16 pull-right fui-cross-16 me"></div></li>';
             }
         }
         document.getElementById('tab_list').innerHTML = htmlContent;
