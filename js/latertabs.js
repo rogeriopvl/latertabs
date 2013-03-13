@@ -4,12 +4,13 @@ var LaterTabs = {
 
     init: function(callback){
         chrome.storage.sync.get('tabs', function(value){
-            if (value){
+            if (value.hasOwnProperty('tabs')){
                 LaterTabs.tabs = value.tabs;
-                if (callback){
-                    callback();
-                }
             }
+            else{
+                LaterTabs.tabs = {};
+            }
+            if (callback){ callback(); }
         });
     },
 
@@ -18,6 +19,7 @@ var LaterTabs = {
     },
 
     save: function(item){
+        console.log(LaterTabs.tabs);
         if (typeof LaterTabs.tabs[item.url] != 'undefined'){
             return false;
         }
