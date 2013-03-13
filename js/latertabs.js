@@ -18,7 +18,7 @@ var LaterTabs = {
     },
 
     save: function(item){
-        if (LaterTabs.tabs[item.url]){
+        if (typeof LaterTabs.tabs[item.url] != 'undefined'){
             return false;
         }
         LaterTabs.tabs[item.url] = item;
@@ -66,7 +66,7 @@ var LaterTabs = {
 
     notify: function(title, text){
         var notification = webkitNotifications.createNotification(
-            '/imgs/clock.png',
+            chrome.extension.getURL('imgs/clock.png'),
             title,
             text
         );
@@ -99,7 +99,6 @@ var LaterTabs = {
 
             tablist[i].addEventListener('click', function(){
                 var tabURL = this.getElementsByTagName('p')[0].innerHTML;
-                console.log(tabURL);
                 LaterTabs.restore(tabURL);
             });
 
@@ -107,7 +106,6 @@ var LaterTabs = {
             deleteButton.addEventListener('click', function(e){
                 e.stopPropagation();
                 var tabURL = this.previousSibling.children[1].innerHTML;
-                console.log(tabURL);
                 LaterTabs.remove(tabURL);
                 createList(); // quick hack to update list
             });
