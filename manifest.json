@@ -18,5 +18,8 @@
         "tabs",
         "notifications",
         "storage"
+    ],
+    "web_accessible_resources": [
+        "imgs/icon48.png"
     ]
 }

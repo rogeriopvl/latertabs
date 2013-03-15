@@ -1,3 +1,5 @@
+"use strict";
+
 var LaterTabs = {
 
     tabs: {},
@@ -66,9 +68,19 @@ var LaterTabs = {
         return LaterTabs.tabs;
     },
 
+    search: function(term, callback){
+        var results = [];
+        for (var i in LaterTabs.tabs){
+            if (LaterTabs.tabs[i].title.indexOf(term) !== -1){
+                results.push(LaterTabs.tabs[i]);
+            }
+        }
+        callback(results);
+    },
+
     notify: function(title, text){
         var notification = webkitNotifications.createNotification(
-            chrome.extension.getURL('imgs/clock.png'),
+            chrome.extension.getURL('imgs/icon48.png'),
             title,
             text
         );
@@ -83,6 +95,7 @@ var LaterTabs = {
         var saveButton = document.getElementById('save_tab_button');
         var saveAllButton = document.getElementById('save_all_button');
         var settingsButton = document.getElementById('settings_button');
+        var searchField = document.getElementById('search_field');
         var tablist = document.getElementsByTagName('li');
 
         saveButton.addEventListener('click', function(){
@@ -95,6 +108,13 @@ var LaterTabs = {
 
         settingsButton.addEventListener('click', function(){
             chrome.tabs.create({ url: "options.html" });
+        });
+
+        searchField.addEventListener('keyup', function(){
+            if (this.value.length > 3 && tablist.length > 0) {
+                console.log('in');
+                LaterTabs.search(this.value, createList);
+            }
         });
 
         for (var i = 0, tlength = tablist.length; i < tlength; i++){
@@ -114,9 +134,11 @@ var LaterTabs = {
         }
     }
 
-    function createList(){
-        var items = LaterTabs.tabs,
-            htmlContent = '';
+    function createList(items){
+        if (!items){
+            items = LaterTabs.tabs;
+        }
+        var htmlContent = '';
         for (var i in items){
             if (items.hasOwnProperty(i)){
                 htmlContent += '<li class="todo">';
