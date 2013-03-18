@@ -114,6 +114,8 @@ var LaterTabs = {
         searchField.addEventListener('keyup', function(e){
             if (this.value.length > 3 && e.keyCode == 13) {
                 LaterTabs.search(this.value, createList);
+            }else if(this.value.length == 0 && e.keyCode == 13){
+                LaterTabs.init(createList);
             }
             return;
         });
