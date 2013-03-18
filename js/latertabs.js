@@ -69,9 +69,10 @@ var LaterTabs = {
     },
 
     search: function(term, callback){
+        term = term.toLowerCase();
         var results = [];
         for (var i in LaterTabs.tabs){
-            if (LaterTabs.tabs[i].title.indexOf(term) !== -1){
+            if (LaterTabs.tabs[i].title.toLowerCase().indexOf(term) !== -1){
                 results.push(LaterTabs.tabs[i]);
             }
         }
@@ -110,11 +111,11 @@ var LaterTabs = {
             chrome.tabs.create({ url: "options.html" });
         });
 
-        searchField.addEventListener('keyup', function(){
-            if (this.value.length > 3 && tablist.length > 0) {
-                console.log('in');
+        searchField.addEventListener('keyup', function(e){
+            if (this.value.length > 3 && e.keyCode == 13) {
                 LaterTabs.search(this.value, createList);
             }
+            return;
         });
 
         for (var i = 0, tlength = tablist.length; i < tlength; i++){
