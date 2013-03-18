@@ -131,6 +131,13 @@ var LaterTabs = {
                 htmlContent += '<div class="settings_btn_16 pull-right fui-cross-16 me"></div></li>';
             }
         }
+        if(htmlContent == ''){
+            htmlContent += '<li class="todo">';
+                htmlContent += '<div class="todo-content">';
+                htmlContent += '<h4 class="todo-name elps">No items</h4>';
+                htmlContent += '</div>';
+                htmlContent += '</li>';
+        }
         document.getElementById('tab_list').innerHTML = htmlContent;
         
         var tablist = document.getElementsByTagName('li');
