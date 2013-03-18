@@ -58,6 +58,7 @@ var LaterTabs = {
     },
 
     remove: function(url){
+        url = url.replace(/&amp;/g, '&');
         if (LaterTabs.tabs[url]){
             delete LaterTabs.tabs[url];
             LaterTabs.syncStorage();
