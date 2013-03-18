@@ -14,6 +14,33 @@ var LaterTabs = {
             }
             if (callback){ callback(); }
         });
+        var saveButton = document.getElementById('save_tab_button');
+        var saveAllButton = document.getElementById('save_all_button');
+        var settingsButton = document.getElementById('settings_button');
+        var searchField = document.getElementById('search_field');
+        
+
+        saveButton.addEventListener('click', function(){
+            LaterTabs.saveCurrent(LaterTabs.createList);
+        });
+
+        saveAllButton.addEventListener('click', function(){
+            LaterTabs.saveAll(LaterTabs.createList);
+        });
+
+        settingsButton.addEventListener('click', function(){
+            chrome.tabs.create({ url: "options.html" });
+        });
+
+        searchField.addEventListener('keyup', function(e){
+            if (this.value.length > 3 && e.keyCode == 13) {
+                LaterTabs.search(this.value, LaterTabs.createList);
+            }else if(this.value.length == 0 && e.keyCode == 13){
+                LaterTabs.init(LaterTabs.createList);
+            }
+            return;
+        });
+
     },
 
     syncStorage: function(){
@@ -86,58 +113,9 @@ var LaterTabs = {
             text
         );
         notification.show();
-    }
-};
+    },
 
-(function(){
-    LaterTabs.init(createList);
-
-    function setupListeners(){
-        var saveButton = document.getElementById('save_tab_button');
-        var saveAllButton = document.getElementById('save_all_button');
-        var settingsButton = document.getElementById('settings_button');
-        var searchField = document.getElementById('search_field');
-        var tablist = document.getElementsByTagName('li');
-
-        saveButton.addEventListener('click', function(){
-            LaterTabs.saveCurrent(createList);
-        });
-
-        saveAllButton.addEventListener('click', function(){
-            LaterTabs.saveAll(createList);
-        });
-
-        settingsButton.addEventListener('click', function(){
-            chrome.tabs.create({ url: "options.html" });
-        });
-
-        searchField.addEventListener('keyup', function(e){
-            if (this.value.length > 3 && e.keyCode == 13) {
-                LaterTabs.search(this.value, createList);
-            }else if(this.value.length == 0 && e.keyCode == 13){
-                LaterTabs.init(createList);
-            }
-            return;
-        });
-
-        for (var i = 0, tlength = tablist.length; i < tlength; i++){
-
-            tablist[i].addEventListener('click', function(){
-                var tabURL = this.getElementsByTagName('p')[0].innerHTML;
-                LaterTabs.restore(tabURL);
-            });
-
-            var deleteButton = tablist[i].getElementsByClassName('fui-cross-16')[0];
-            deleteButton.addEventListener('click', function(e){
-                e.stopPropagation();
-                var tabURL = this.previousSibling.children[1].innerHTML;
-                LaterTabs.remove(tabURL);
-                createList(); // quick hack to update list
-            });
-        }
-    }
-
-    function createList(items){
+    createList: function(items){
         if (!items){
             items = LaterTabs.tabs;
         }
@@ -153,6 +131,26 @@ var LaterTabs = {
             }
         }
         document.getElementById('tab_list').innerHTML = htmlContent;
-        setupListeners();
+        
+        var tablist = document.getElementsByTagName('li');
+        for (var i = 0, tlength = tablist.length; i < tlength; i++){
+
+            tablist[i].addEventListener('click', function(){
+                var tabURL = this.getElementsByTagName('p')[0].innerHTML;
+                LaterTabs.restore(tabURL);
+            });
+
+            var deleteButton = tablist[i].getElementsByClassName('fui-cross-16')[0];
+            deleteButton.addEventListener('click', function(e){
+                e.stopPropagation();
+                var tabURL = this.previousSibling.children[1].innerHTML;
+                LaterTabs.remove(tabURL);
+                LaterTabs.createList(); // quick hack to update list
+            });
+        }
     }
+};
+
+(function(){
+    LaterTabs.init(LaterTabs.createList);
 })();
