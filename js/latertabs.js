@@ -1,16 +1,46 @@
+"use strict";
+
 var LaterTabs = {
 
     tabs: {},
 
     init: function(callback){
         chrome.storage.sync.get('tabs', function(value){
-            if (value){
+            if (value.hasOwnProperty('tabs')){
                 LaterTabs.tabs = value.tabs;
-                if (callback){
-                    callback();
-                }
             }
+            else{
+                LaterTabs.tabs = {};
+            }
+            if (callback){ callback(); }
         });
+        var saveButton = document.getElementById('save_tab_button');
+        var saveAllButton = document.getElementById('save_all_button');
+        var settingsButton = document.getElementById('settings_button');
+        var searchField = document.getElementById('search_field');
+        
+
+        saveButton.addEventListener('click', function(){
+            LaterTabs.saveCurrent(LaterTabs.createList);
+        });
+
+        saveAllButton.addEventListener('click', function(){
+            LaterTabs.saveAll(LaterTabs.createList);
+        });
+
+        settingsButton.addEventListener('click', function(){
+            chrome.tabs.create({ url: "options.html" });
+        });
+
+        searchField.addEventListener('keyup', function(e){
+            if (this.value.length > 3 && e.keyCode == 13) {
+                LaterTabs.search(this.value, LaterTabs.createList);
+            }else if(this.value.length == 0 && e.keyCode == 13){
+                LaterTabs.init(LaterTabs.createList);
+            }
+            return;
+        });
+
     },
 
     syncStorage: function(){
@@ -18,7 +48,8 @@ var LaterTabs = {
     },
 
     save: function(item){
-        if (LaterTabs.tabs[item.url]){
+        console.log(LaterTabs.tabs);
+        if (typeof LaterTabs.tabs[item.url] != 'undefined'){
             return false;
         }
         LaterTabs.tabs[item.url] = item;
@@ -27,6 +58,7 @@ var LaterTabs = {
     },
 
     remove: function(url){
+        url = url.replace(/&amp;/g, '&');
         if (LaterTabs.tabs[url]){
             delete LaterTabs.tabs[url];
             LaterTabs.syncStorage();
@@ -64,67 +96,62 @@ var LaterTabs = {
         return LaterTabs.tabs;
     },
 
+    search: function(term, callback){
+        term = term.toLowerCase();
+        var results = [];
+        for (var i in LaterTabs.tabs){
+            if (LaterTabs.tabs[i].title.toLowerCase().indexOf(term) !== -1){
+                results.push(LaterTabs.tabs[i]);
+            }
+        }
+        callback(results);
+    },
+
     notify: function(title, text){
         var notification = webkitNotifications.createNotification(
-            '/imgs/clock.png',
+            chrome.extension.getURL('imgs/icon48.png'),
             title,
             text
         );
         notification.show();
+    },
+
+    createList: function(items){
+        if (!items){
+            items = LaterTabs.tabs;
+        }
+        var htmlContent = '';
+        for (var i in items){
+            if (items.hasOwnProperty(i)){
+                htmlContent += '<li class="todo">';
+                htmlContent += '<div class="todo-icon fui-time-24"></div>';
+                htmlContent += '<div class="todo-content">';
+                htmlContent += '<h4 class="todo-name elps">' + items[i].title + '</h4>';
+                htmlContent += '<p class="elps">' + items[i].url + '</p></div>';
+                htmlContent += '<div class="settings_btn_16 pull-right fui-cross-16 me"></div></li>';
+            }
+        }
+        document.getElementById('tab_list').innerHTML = htmlContent;
+        
+        var tablist = document.getElementsByTagName('li');
+        for (var i = 0, tlength = tablist.length; i < tlength; i++){
+
+            tablist[i].addEventListener('click', function(){
+                var tabURL = this.getElementsByTagName('p')[0].innerHTML;
+                LaterTabs.restore(tabURL);
+            });
+
+            var deleteButton = tablist[i].getElementsByClassName('fui-cross-16')[0];
+            deleteButton.addEventListener('click', function(e){
+                e.stopPropagation();
+                var tabURL = this.previousSibling.children[1].innerHTML;
+                LaterTabs.remove(tabURL);
+                LaterTabs.createList(); // quick hack to update list
+            });
+        }
     }
 };
 
 (function(){
-    LaterTabs.init(createList);
-
-    function setupListeners(){
-        var closeButton = document.getElementById('close_button');
-        var saveButton = document.getElementById('save_current_tab_button');
-        var saveAllButton = document.getElementById('save_all_tabs_button');
-        var settingsButton = document.getElementById('settings_button');
-        var tablist = document.getElementsByTagName('article');
-
-        closeButton.addEventListener('click', function(){
-            window.close();
-        });
-
-        saveButton.addEventListener('click', function(){
-            LaterTabs.saveCurrent(createList);
-        });
-
-        saveAllButton.addEventListener('click', function(){
-            LaterTabs.saveAll(createList);
-        });
-
-        settingsButton.addEventListener('click', function(){
-            chrome.tabs.create({ url: "options.html" });
-        });
-
-        for (var i = 0, tlength = tablist.length; i < tlength; i++){
-            var deleteButton = tablist[i].getElementsByTagName('i')[0];
-            deleteButton.addEventListener('click', function(){
-                LaterTabs.remove(this.nextSibling.innerHTML);
-                createList(); // quick hack to update list
-            });
-
-            tablist[i].children[0].addEventListener('click', function(){
-                LaterTabs.restore(deleteButton.nextSibling.innerHTML);
-            });
-        }
-    }
-
-    function createList(){
-        var items = LaterTabs.tabs,
-            htmlContent = '';
-        for (var i in items){
-            if (items.hasOwnProperty(i)){
-                htmlContent += '<article><h2><a href="' + items[i].url + '">';
-                htmlContent += items[i].title + '</a></h2>';
-                htmlContent += '<i class="delete_button icon-trash delete" title="Delete saved tab"></i>';
-                htmlContent += '<footer>' + items[i].url + '</footer></article>';
-            }
-        }
-        document.getElementById('tab_list').innerHTML = htmlContent;
-        setupListeners();
-    }
+    LaterTabs.init(LaterTabs.createList);
 })();

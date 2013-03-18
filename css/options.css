@@ -1,0 +1,16 @@
+body { width: 100%; } /* to reset the size limit defined for the extension */
+
+.demo-logo { margin-top: 80px; }
+
+.content {
+    background-color: #eee;
+    border-radius: 10px;
+}
+
+.header {
+    margin-bottom: 50px;
+}
+
+#toggle_notifications {
+    margin-top: 10px;
+}

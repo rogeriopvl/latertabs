@@ -3,21 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Later Tabs Options</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,900,400italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/flat-ui.css" />
+    <link rel="stylesheet" href="css/options.css" />
 </head>
 
 <body>
-    <header>
-        <h2>Later Tabs Options</h2>
-    </header>
+    <div class="container">
+        <div class="header row-fluid span2 offset3">
+            <h1 class="demo-logo">Later Tabs</h1>
+            <h4 class="center">Settings</h4>
+        </div>
 
-    <section>
-        <input type="checkbox" name="show_desktop_notifications" />
-        <label>Show Desktop Notifications</label> 
+        <div class="row-fluid span content">
+            <div class="row-fluid span3 offset3">
+                <h2>Notifications: </h2> 
+                <small>Turn ON or OFF desktop notifications</small>
+                <div id="toggle_notifications" class="toggle">
+                    <label class="toggle-radio" for="toggle-notifications_off">ON</label>
+                    <input type="radio" id="toggle_input_on" name="toggle-notifications_off" checked="checked">
+                    <label class="toggle-radio" for="toggle-notifications_on">OFF</label>
+                    <input type="radio" id="toggle_input_off" name="toggle-notifications_on">
+                </div>
+            </div>
+        </div>
 
-    </section>
-    <input type="button" id="save_options_button" value="Save">
-    
-    <script src="/js/options.js"></script>
+    </div> 
+    <script src="js/options.js"></script>
 </body>
 </html>
