@@ -35,8 +35,8 @@ var LaterTabs = {
         searchField.addEventListener('keyup', function(e){
             if (this.value.length > 3 && e.keyCode == 13) {
                 LaterTabs.search(this.value, LaterTabs.createList);
-            }else if(this.value.length == 0 && e.keyCode == 13){
-                LaterTabs.init(LaterTabs.createList);
+            }else if(this.value.length === 0 && e.keyCode == 13){
+                LaterTabs.createList();
             }
             return;
         });
@@ -48,7 +48,6 @@ var LaterTabs = {
     },
 
     save: function(item){
-        console.log(LaterTabs.tabs);
         if (typeof LaterTabs.tabs[item.url] != 'undefined'){
             return false;
         }
@@ -119,11 +118,12 @@ var LaterTabs = {
     createList: function(items){
         if (!items){
             items = LaterTabs.tabs;
+            console.log(LaterTabs.tabs)
         }
         var htmlContent = '';
         var emptyList = false;
         for (var i in items){
-            if (items.hasOwnProperty(i)){
+            if (items[i] || items.hasOwnProperty(i)){
                 htmlContent += '<li class="todo">';
                 htmlContent += '<div class="todo-icon fui-time-24"></div>';
                 htmlContent += '<div class="todo-content">';
