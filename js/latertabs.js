@@ -14,6 +14,33 @@ var LaterTabs = {
             }
             if (callback){ callback(); }
         });
+        var saveButton = document.getElementById('save_tab_button');
+        var saveAllButton = document.getElementById('save_all_button');
+        var settingsButton = document.getElementById('settings_button');
+        var searchField = document.getElementById('search_field');
+        
+
+        saveButton.addEventListener('click', function(){
+            LaterTabs.saveCurrent(LaterTabs.createList);
+        });
+
+        saveAllButton.addEventListener('click', function(){
+            LaterTabs.saveAll(LaterTabs.createList);
+        });
+
+        settingsButton.addEventListener('click', function(){
+            chrome.tabs.create({ url: "options.html" });
+        });
+
+        searchField.addEventListener('keyup', function(e){
+            if (this.value.length > 3 && e.keyCode == 13) {
+                LaterTabs.search(this.value, LaterTabs.createList);
+            }else if(this.value.length === 0 && e.keyCode == 13){
+                LaterTabs.createList();
+            }
+            return;
+        });
+
     },
 
     syncStorage: function(){
@@ -21,7 +48,6 @@ var LaterTabs = {
     },
 
     save: function(item){
-        console.log(LaterTabs.tabs);
         if (typeof LaterTabs.tabs[item.url] != 'undefined'){
             return false;
         }
@@ -31,6 +57,7 @@ var LaterTabs = {
     },
 
     remove: function(url){
+        url = url.replace(/&amp;/g, '&');
         if (LaterTabs.tabs[url]){
             delete LaterTabs.tabs[url];
             LaterTabs.syncStorage();
@@ -86,38 +113,36 @@ var LaterTabs = {
             text
         );
         notification.show();
-    }
-};
+    },
 
-(function(){
-    LaterTabs.init(createList);
-
-    function setupListeners(){
-        var saveButton = document.getElementById('save_tab_button');
-        var saveAllButton = document.getElementById('save_all_button');
-        var settingsButton = document.getElementById('settings_button');
-        var searchField = document.getElementById('search_field');
-        var tablist = document.getElementsByTagName('li');
-
-        saveButton.addEventListener('click', function(){
-            LaterTabs.saveCurrent(createList);
-        });
-
-        saveAllButton.addEventListener('click', function(){
-            LaterTabs.saveAll(createList);
-        });
-
-        settingsButton.addEventListener('click', function(){
-            chrome.tabs.create({ url: "options.html" });
-        });
-
-        searchField.addEventListener('keyup', function(e){
-            if (this.value.length > 3 && e.keyCode == 13) {
-                LaterTabs.search(this.value, createList);
+    createList: function(items){
+        if (!items){
+            items = LaterTabs.tabs;
+            console.log(LaterTabs.tabs)
+        }
+        var htmlContent = '';
+        var emptyList = false;
+        for (var i in items){
+            if (items[i] || items.hasOwnProperty(i)){
+                htmlContent += '<li class="todo">';
+                htmlContent += '<div class="todo-icon fui-time-24"></div>';
+                htmlContent += '<div class="todo-content">';
+                htmlContent += '<h4 class="todo-name elps">' + items[i].title + '</h4>';
+                htmlContent += '<p class="elps">' + items[i].url + '</p></div>';
+                htmlContent += '<div class="settings_btn_16 pull-right fui-cross-16 me"></div></li>';
             }
-            return;
-        });
-
+        }
+        if(htmlContent == ''){
+            emptyList = true;
+            htmlContent += '<li class="todo">';
+            htmlContent += '<div class="todo-content">';
+            htmlContent += '<h4 class="todo-name elps">No items</h4>';
+            htmlContent += '</div>';
+            htmlContent += '</li>';
+        }
+        document.getElementById('tab_list').innerHTML = htmlContent;
+        
+        var tablist = !emptyList ? document.getElementsByTagName('li') : [];
         for (var i = 0, tlength = tablist.length; i < tlength; i++){
 
             tablist[i].addEventListener('click', function(){
@@ -130,27 +155,12 @@ var LaterTabs = {
                 e.stopPropagation();
                 var tabURL = this.previousSibling.children[1].innerHTML;
                 LaterTabs.remove(tabURL);
-                createList(); // quick hack to update list
+                LaterTabs.createList(); // quick hack to update list
             });
         }
     }
+};
 
-    function createList(items){
-        if (!items){
-            items = LaterTabs.tabs;
-        }
-        var htmlContent = '';
-        for (var i in items){
-            if (items.hasOwnProperty(i)){
-                htmlContent += '<li class="todo">';
-                htmlContent += '<div class="todo-icon fui-time-24"></div>';
-                htmlContent += '<div class="todo-content">';
-                htmlContent += '<h4 class="todo-name elps">' + items[i].title + '</h4>';
-                htmlContent += '<p class="elps">' + items[i].url + '</p></div>';
-                htmlContent += '<div class="settings_btn_16 pull-right fui-cross-16 me"></div></li>';
-            }
-        }
-        document.getElementById('tab_list').innerHTML = htmlContent;
-        setupListeners();
-    }
+(function(){
+    LaterTabs.init(LaterTabs.createList);
 })();
