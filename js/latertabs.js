@@ -121,6 +121,7 @@ var LaterTabs = {
             items = LaterTabs.tabs;
         }
         var htmlContent = '';
+        var emptyList = false;
         for (var i in items){
             if (items.hasOwnProperty(i)){
                 htmlContent += '<li class="todo">';
@@ -132,15 +133,16 @@ var LaterTabs = {
             }
         }
         if(htmlContent == ''){
+            emptyList = true;
             htmlContent += '<li class="todo">';
-                htmlContent += '<div class="todo-content">';
-                htmlContent += '<h4 class="todo-name elps">No items</h4>';
-                htmlContent += '</div>';
-                htmlContent += '</li>';
+            htmlContent += '<div class="todo-content">';
+            htmlContent += '<h4 class="todo-name elps">No items</h4>';
+            htmlContent += '</div>';
+            htmlContent += '</li>';
         }
         document.getElementById('tab_list').innerHTML = htmlContent;
         
-        var tablist = document.getElementsByTagName('li');
+        var tablist = !emptyList ? document.getElementsByTagName('li') : [];
         for (var i = 0, tlength = tablist.length; i < tlength; i++){
 
             tablist[i].addEventListener('click', function(){
