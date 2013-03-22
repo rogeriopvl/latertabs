@@ -4,6 +4,8 @@ var LaterTabs = {
 
     tabs: {},
 
+    timer: null,
+
     init: function(callback){
         chrome.storage.sync.get('tabs', function(value){
             if (value.hasOwnProperty('tabs')){
@@ -14,11 +16,11 @@ var LaterTabs = {
             }
             if (callback){ callback(); }
         });
+
         var saveButton = document.getElementById('save_tab_button');
         var saveAllButton = document.getElementById('save_all_button');
         var settingsButton = document.getElementById('settings_button');
         var searchField = document.getElementById('search_field');
-        
 
         saveButton.addEventListener('click', function(){
             LaterTabs.saveCurrent(LaterTabs.createList);
@@ -33,12 +35,26 @@ var LaterTabs = {
         });
 
         searchField.addEventListener('keyup', function(e){
-            if (this.value.length > 3 && e.keyCode == 13) {
-                LaterTabs.search(this.value, LaterTabs.createList);
-            }else if(this.value.length === 0 && e.keyCode == 13){
-                LaterTabs.createList();
+            clearTimeout(LaterTabs.timer);
+            if (this.value.length > 0){
+                if (e.keyCode === 13){
+                    LaterTabs.search(this.value, LaterTabs.createList);
+                }
+                else{
+                    var self = this;
+                    LaterTabs.timer = setTimeout(function(){
+                        LaterTabs.search(self.value, LaterTabs.createList);
+                    }, 1000);
+                }
             }
-            return;
+            else{
+                if (e.keyCode === 13){
+                    LaterTabs.createList();
+                }
+                else{
+                    LaterTabs.timer = setTimeout(LaterTabs.createList, 1000);
+                }
+            }
         });
 
     },
@@ -118,10 +134,11 @@ var LaterTabs = {
     createList: function(items){
         if (!items){
             items = LaterTabs.tabs;
-            console.log(LaterTabs.tabs)
         }
+
         var htmlContent = '';
         var emptyList = false;
+
         for (var i in items){
             if (items[i] || items.hasOwnProperty(i)){
                 htmlContent += '<li class="todo">';
@@ -132,6 +149,7 @@ var LaterTabs = {
                 htmlContent += '<div class="settings_btn_16 pull-right fui-cross-16 me"></div></li>';
             }
         }
+
         if(htmlContent == ''){
             emptyList = true;
             htmlContent += '<li class="todo">';
@@ -143,6 +161,7 @@ var LaterTabs = {
         document.getElementById('tab_list').innerHTML = htmlContent;
         
         var tablist = !emptyList ? document.getElementsByTagName('li') : [];
+
         for (var i = 0, tlength = tablist.length; i < tlength; i++){
 
             tablist[i].addEventListener('click', function(){
