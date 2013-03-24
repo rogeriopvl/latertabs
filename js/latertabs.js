@@ -4,6 +4,8 @@ var LaterTabs = {
 
     tabs: {},
 
+    options: {},
+
     timer: null,
 
     init: function(callback){
@@ -14,7 +16,11 @@ var LaterTabs = {
             else{
                 LaterTabs.tabs = {};
             }
-            if (callback){ callback(); }
+            // read options
+            chrome.storage.sync.get('options', function(value){
+                LaterTabs.options = value.options;
+                if (callback){ callback(); }
+            });
         });
 
         var saveButton = document.getElementById('save_tab_button');
@@ -123,12 +129,14 @@ var LaterTabs = {
     },
 
     notify: function(title, text){
-        var notification = webkitNotifications.createNotification(
-            chrome.extension.getURL('imgs/icon48.png'),
-            title,
-            text
-        );
-        notification.show();
+        if (LaterTabs.options.notifications){
+            var notification = webkitNotifications.createNotification(
+                chrome.extension.getURL('imgs/icon48.png'),
+                title,
+                text
+            );
+            notification.show();
+        }
     },
 
     createList: function(items){
@@ -150,7 +158,7 @@ var LaterTabs = {
             }
         }
 
-        if(htmlContent == ''){
+        if (htmlContent == ''){
             emptyList = true;
             htmlContent += '<li class="todo">';
             htmlContent += '<div class="todo-content">';
