@@ -44,6 +44,11 @@ document.addEventListener('DOMContentLoaded', function(){
             }
             saveOptions(options);
         });
+
+        // close button
+        document.getElementById('close_options').addEventListener('click', function(){
+            window.close();
+        });
     });
 });
 
