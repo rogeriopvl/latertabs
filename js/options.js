@@ -1,24 +1,49 @@
-function save_options(){
-    // TODO
-    console.log('Options saved!');
+function saveOptions(options){
+    chrome.storage.sync.set({options: options});
 };
 
-document.addEventListener('DOMContentLoaded', function(){
-    // code converted to pure JS from flat-ui toggle
-    var toggleNotifications = document.getElementById('toggle_notifications');
+function getOptions(callback){
+    chrome.storage.sync.get('options', function(value){
+        if (!value){
+            // notifications on by default
+            value = { notifications: true };
+            saveOptions(value);
+        }
+        callback(value.options);
+    });
+}
 
-    toggleNotifications.addEventListener('click', function(){
-        var onInput = document.getElementById('toggle_input_on');
-        var offInput = document.getElementById('toggle_input_off');
-        if (onInput.checked){
-            this.className = 'toggle toggle-off';
-            onInput.checked = false;
-            offInput.checked = true;
+document.addEventListener('DOMContentLoaded', function(){
+    getOptions(function(options){
+        // code converted to pure JS from flat-ui toggle
+        var toggleNotifications = document.getElementById('toggle_notifications');
+
+        if (options.notifications){
+            toggleNotifications.className = 'toggle';
         }
-        else if (offInput.checked){
-            this.className = 'toggle';
-            offInput.checked = false;
-            onInput.checked = true;
+        else{
+            toggleNotifications.className = 'toggle toggle-off';
         }
+
+        toggleNotifications.addEventListener('click', function(){
+            var onInput = document.getElementById('toggle_input_on');
+            var offInput = document.getElementById('toggle_input_off');
+            if (onInput.checked){
+                this.className = 'toggle toggle-off';
+                onInput.checked = false;
+                offInput.checked = true;
+
+                options.notifications = false;
+            }
+            else if (offInput.checked){
+                this.className = 'toggle';
+                offInput.checked = false;
+                onInput.checked = true;
+
+                options.notifications = true;
+            }
+            saveOptions(options);
+        });
     });
 });
+
