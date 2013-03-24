@@ -41,6 +41,8 @@ var LaterTabs = {
         });
 
         searchField.addEventListener('keyup', function(e){
+            var searchField = document.getElementsByClassName('todo-search')[0];
+            searchField.className = 'todo-search todo-search-loading';
             clearTimeout(LaterTabs.timer);
             if (this.value.length > 0){
                 if (e.keyCode === 13){
@@ -185,6 +187,10 @@ var LaterTabs = {
                 LaterTabs.createList(); // quick hack to update list
             });
         }
+
+        // remove the loading field if present
+        var loadingField = document.getElementsByClassName('todo-search-loading');
+        if (loadingField.length > 0){ loadingField[0].className = 'todo-search'; }
     }
 };
 

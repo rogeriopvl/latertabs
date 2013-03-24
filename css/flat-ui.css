@@ -1215,6 +1215,10 @@ textarea,
 	padding: 9px 16px 10px 16px;
 }
 
+.todo-search-loading {
+    background: #3498DB url("../imgs/loading.gif") 95% center no-repeat;
+}
+
 input.todo-search-field {
     background: none;
     border: none;
