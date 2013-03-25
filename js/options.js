@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function(){
         // code converted to pure JS from flat-ui toggle
         var toggleNotifications = document.getElementById('toggle_notifications');
 
-        if (options.notifications){
+        if (!options || options.notifications){
             toggleNotifications.className = 'toggle';
         }
         else{
