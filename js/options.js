@@ -4,7 +4,7 @@ function saveOptions(options){
 
 function getOptions(callback){
     chrome.storage.sync.get('options', function(value){
-        if (!value){
+        if (!value.options){
             // notifications on by default
             value = { notifications: true };
             saveOptions(value);
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function(){
         // code converted to pure JS from flat-ui toggle
         var toggleNotifications = document.getElementById('toggle_notifications');
 
-        if (!options || options.notifications){
+        if (options.notifications){
             toggleNotifications.className = 'toggle';
         }
         else{
