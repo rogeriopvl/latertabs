@@ -1,0 +1,579 @@
+@font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Lato Regular'), local('Lato-Regular'), url(../fonts/lato400.woff) format('woff');
+}
+@font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Lato Bold'), local('Lato-Bold'), url(../fonts/lato700.woff) format('woff');
+}
+@font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 900;
+    src: local('Lato Black'), local('Lato-Black'), url(../fonts/lato900.woff) format('woff');
+}
+@font-face {
+    font-family: 'Lato';
+    font-style: italic;
+    font-weight: 400;
+    src: local('Lato Italic'), local('Lato-Italic'), url(../fonts/lato400italic.woff) format('woff');
+}
+@font-face {
+    font-family: "Flat-UI-Icons-16";
+    src: url("../fonts/Flat-UI-Icons-16.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Use the following CSS code if you want to have a class per icon */
+/*Instead of a list of all class selectors,
+ *you can use the generic selector below, but it's slower:
+ *[class*="fui-"]:before { */
+.fui-volume-16:before, .fui-video-16:before, .fui-time-16:before, .fui-settings-16:before, .fui-plus-16:before, .fui-new-16:before, .fui-menu-16:before, .fui-man-16:before, .fui-mail-16:before, .fui-lock-16:before, .fui-location-16:before, .fui-heart-16:before, .fui-eye-16:before, .fui-cross-16:before, .fui-cmd-16:before, .fui-checkround-16:before, .fui-checkmark-16:before, .fui-camera-16:before, .fui-calendar-16:before, .fui-bubble-16:before {
+  font-family: "Flat-UI-Icons-16";
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased; }
+
+.fui-volume-16:before { content: "\e000"; } .fui-video-16:before { content: "\e001"; } .fui-time-16:before { content: "\e002"; } .fui-settings-16:before { content: "\e003"; } .fui-plus-16:before { content: "\e004"; } .fui-new-16:before { content: "\e005"; } .fui-menu-16:before { content: "\e006"; } .fui-man-16:before { content: "\e007"; } .fui-mail-16:before { content: "\e008"; } .fui-lock-16:before { content: "\e009"; } .fui-location-16:before { content: "\e00a"; } .fui-heart-16:before { content: "\e00b"; } .fui-eye-16:before { content: "\e00c"; } .fui-cross-16:before { content: "\e00d"; } .fui-cmd-16:before { content: "\e00e"; } .fui-checkround-16:before { content: "\e00f"; } .fui-checkmark-16:before { content: "\e010"; } .fui-camera-16:before { content: "\e011"; } .fui-calendar-16:before { content: "\e012"; } .fui-bubble-16:before { content: "\e013"; }
+
+@font-face {
+  font-family: "Flat-UI-Icons-24";
+  src: url("../fonts/Flat-UI-Icons-24.woff") format("woff");
+  font-weight: normal;
+  font-style: normal; }
+
+/* Use the following CSS code if you want to have a class per icon */
+/*Instead of a list of all class selectors,
+ *you can use the generic selector below, but it's slower:
+ *[class*="fui-"]:before { */
+.fui-video-24:before, .fui-time-24:before, .fui-settings-24:before, .fui-plus-24:before, .fui-new-24:before, .fui-menu-24:before, .fui-man-24:before, .fui-mail-24:before, .fui-lock-24:before, .fui-location-24:before, .fui-heart-24:before, .fui-eye-24:before, .fui-cross-24:before, .fui-cmd-24:before, .fui-checkround-24:before, .fui-checkmark-24:before, .fui-calendar-24:before, .fui-bubble-24:before, .fui-volume-24:before, .fui-camera-24:before {
+  font-family: "Flat-UI-Icons-24";
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased; }
+
+.fui-video-24:before { content: "\e000"; } .fui-time-24:before { content: "\e001"; } .fui-settings-24:before { content: "\e002"; } .fui-plus-24:before { content: "\e003"; } .fui-new-24:before { content: "\e005"; } .fui-menu-24:before { content: "\e006"; } .fui-man-24:before { content: "\e007"; } .fui-mail-24:before { content: "\e008"; } .fui-lock-24:before { content: "\e009"; } .fui-location-24:before { content: "\e00a"; } .fui-heart-24:before { content: "\e00b"; } .fui-eye-24:before { content: "\e00c"; } .fui-cross-24:before { content: "\e00d"; } .fui-cmd-24:before { content: "\e00e"; } .fui-checkround-24:before { content: "\e00f"; } .fui-checkmark-24:before { content: "\e010"; } .fui-calendar-24:before { content: "\e011"; } .fui-bubble-24:before { content: "\e012"; } .fui-volume-24:before { content: "\e013"; } .fui-camera-24:before { content: "\e004"; }
+
+body {
+  color: #34495e;
+  font: 14px/1.231 "Lato", sans-serif; }
+
+a {
+  color: #3498DB;
+  text-decoration: underline;
+  -webkit-transition: 0.25s;
+  -o-transition: 0.25s;
+  transition: 0.25s;
+  -webkit-backface-visibility: hidden; }
+  a:hover {
+    color: #2ecc71;
+    text-decoration: none; }
+
+h1 {
+  font-size: 32px;
+  font-weight: 900; }
+
+h2 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 2px; }
+
+h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  margin-top: 2px; }
+
+h4 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 4px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 80%;
+}
+
+.big-text {
+    font-size: 60px;
+}
+
+body {
+    width: 422px;
+}
+
+.dark-body {
+    background-color: #2c3e50;
+}
+
+#main {
+    width: 100%;
+    margin: 0;
+}
+
+h5 {
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase; }
+
+h6 {
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase; }
+
+.btn {
+  border: none;
+  background: #34495e;
+  color: white;
+  font-size: 16.5px;
+  text-decoration: none;
+  text-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-transition: 0.25s;
+  -o-transition: 0.25s;
+  transition: 0.25s;
+  -webkit-backface-visibility: hidden; }
+  .btn:hover, .btn:focus {
+    background-color: #4e6d8d;
+    color: white;
+    -webkit-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s;
+    -webkit-backface-visibility: hidden; }
+  .btn:active, .btn.active {
+    background-color: #2c3e50;
+    color: rgba(255, 255, 255, 0.75);
+    -webkit-box-shadow: none;
+    box-shadow: none; }
+  .btn.disabled, .btn[disabled] {
+    background-color: #95a5a6;
+    color: white; }
+  .btn.btn-large {
+    padding-bottom: 12px;
+    padding-top: 13px; }
+  .btn.btn-primary {
+    background-color: #3498DB; }
+    .btn.btn-primary:hover, .btn.btn-primary:focus {
+      background-color: #2fe2bf; }
+    .btn.btn-primary:active, .btn.btn-primary.active {
+      background-color: #16a085; }
+  .btn.btn-info {
+    background-color: #3498db; }
+    .btn.btn-info:hover, .btn.btn-info:focus {
+      background-color: #5dade2; }
+    .btn.btn-info:active, .btn.btn-info.active {
+      background-color: #2383c4; }
+  .btn.btn-danger {
+    background-color: #e74c3c; }
+    .btn.btn-danger:hover, .btn.btn-danger:focus {
+      background-color: #ec7063; }
+    .btn.btn-danger:active, .btn.btn-danger.active {
+      background-color: #dc2d1b; }
+  .btn.btn-success {
+    background-color: #2ecc71; }
+    .btn.btn-success:hover, .btn.btn-success:focus {
+      background-color: #55d98d; }
+    .btn.btn-success:active, .btn.btn-success.active {
+      background-color: #27ad60; }
+  .btn.btn-warning {
+    background-color: #f1c40f; }
+    .btn.btn-warning:hover, .btn.btn-warning:focus {
+      background-color: #f4d03f; }
+    .btn.btn-warning:active, .btn.btn-warning.active {
+      background-color: #cea70c; }
+  .btn-toolbar .btn {
+    font-size: 18px;
+    padding: 10px 14px 9px; }
+    .btn-toolbar .btn:first-child {
+      -webkit-border-radius: 6px 0 0 6px;
+      border-radius: 6px 0 0 6px; }
+    .btn-toolbar .btn:last-child {
+      -webkit-border-radius: 0 6px 6px 0;
+      border-radius: 0 6px 6px 0; }
+
+.btn-toolbar .btn.active {
+  color: white; }
+
+
+textarea,
+input[type="search"],
+.uneditable-input {
+  border: 2px solid #dce4ec;
+  color: #34495e;
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+  padding: 8px 0 9px 10px;
+  text-indent: 1px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: none;
+  box-shadow: none; }
+  textarea::-webkit-input-placeholder,
+  input[type="search"]::-webkit-input-placeholder,
+  .uneditable-input::-webkit-input-placeholder {
+    color: #acb6c0; }
+  textarea.placeholder,
+  input[type="search"].placeholder,
+  .uneditable-input.placeholder {
+    color: #acb6c0; }
+  textarea:focus,
+  input[type="search"]:focus,
+  .uneditable-input:focus {
+    border-color: #3498DB;
+    -webkit-box-shadow: none;
+    box-shadow: none; }
+
+input[disabled],
+input[readonly],
+textarea[disabled],
+textarea[readonly] {
+  background-color: #eaeded;
+  border-color: transparent;
+  color: #cad2d3;
+  cursor: default; }
+
+input,
+textarea,
+.uneditable-input {
+  width: 192px; }
+
+.checkbox,
+.radio {
+  margin-bottom: 12px;
+  padding-left: 32px;
+  position: relative;
+  -webkit-transition: 0.25s;
+  -o-transition: 0.25s;
+  transition: 0.25s;
+  -webkit-backface-visibility: hidden; }
+  .checkbox:hover,
+  .radio:hover {
+    color: #3498DB; }
+  .checkbox input,
+  .radio input {
+    outline: none !important;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    zoom: 1; }
+  .checkbox.checked .icon,
+  .radio.checked .icon {
+    background-position: -60px -30px;
+    opacity: 1;
+    display: block\9; }
+  .checkbox.checked .icon-to-fade,
+  .radio.checked .icon-to-fade {
+    opacity: 0;
+    display: none\9; }
+  .checkbox.disabled,
+  .radio.disabled {
+    color: #d7dddd;
+    cursor: default; }
+    .checkbox.disabled .icon,
+    .radio.disabled .icon {
+      opacity: 0;
+      display: none\9; }
+    .checkbox.disabled .icon-to-fade,
+    .radio.disabled .icon-to-fade {
+      background-position: -30px -60px;
+      opacity: 1;
+      display: block\9; }
+    .checkbox.disabled.checked .icon,
+    .radio.disabled.checked .icon {
+      background-position: 0 -90px;
+      opacity: 1;
+      display: block\9; }
+    .checkbox.disabled.checked .icon-to-fade,
+    .radio.disabled.checked .icon-to-fade {
+      opacity: 0;
+      display: none\9; }
+  .checkbox .icon,
+  .checkbox .icon-to-fade,
+  .radio .icon,
+  .radio .icon-to-fade {
+    background: url("../images/checkbox.png") -90px 0 no-repeat;
+    display: block;
+    height: 20px;
+    left: 0;
+    opacity: 1;
+    position: absolute;
+    top: -1px;
+    width: 20px;
+    -webkit-transition: opacity 0.1s linear;
+    -o-transition: opacity 0.1s linear;
+    transition: opacity 0.1s linear;
+    -webkit-backface-visibility: hidden; }
+  .checkbox .icon,
+  .radio .icon {
+    opacity: 0;
+    top: 0;
+    z-index: 2;
+    display: none\9; }
+
+.radio .icon,
+.radio .icon-to-fade {
+  background-image: url("../images/radio.png"); }
+
+.toggle {
+  background-color: #34495e;
+  border-radius: 60px;
+  color: white;
+  height: 29px;
+  margin: 0 12px 12px 0;
+  overflow: hidden;
+  *zoom: 1;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  -webkit-transition: 0.25s;
+  -o-transition: 0.25s;
+  transition: 0.25s;
+  -webkit-backface-visibility: hidden; }
+  .toggle:before, .toggle:after {
+    display: table;
+    content: ""; }
+  .toggle:after {
+    clear: both; }
+  .toggle.toggle-off {
+    background-color: #cbd2d8; }
+    .toggle.toggle-off .toggle-radio {
+      background-image: url("../imgs/toggle/icon-off.png");
+      background-position: 0 0;
+      color: #34495e;
+      left: 0;
+      margin-left: 0.5px;
+      margin-right: -13px;
+      z-index: 1; }
+      .toggle.toggle-off .toggle-radio:first-child {
+        left: -120%; }
+  .toggle .toggle-radio {
+    background: url("../imgs/toggle/icon-on.png") right top no-repeat;
+    display: block;
+    font-weight: 700;
+    height: 21px;
+    left: 120%;
+    margin-left: -13px;
+    padding: 5px 32px 3px;
+    position: relative;
+    text-align: center;
+    z-index: 2;
+    -webkit-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s;
+    -webkit-backface-visibility: hidden; }
+    .toggle .toggle-radio:first-child {
+      margin-bottom: -29px;
+      left: 0; }
+  .toggle input {
+    display: none;
+    position: absolute;
+    outline: none !important;
+    display: block\9;
+    opacity: 0.01;
+    filter: alpha(opacity=1);
+    zoom: 1; }
+  .toggle.toggle-icon {
+    border-radius: 6px 7px 7px 6px; }
+    .toggle.toggle-icon.toggle-off {
+      border-radius: 7px 6px 6px 7px; }
+      .toggle.toggle-icon.toggle-off .toggle-radio {
+        background-image: url("../imgs/toggle/block-off.png");
+        background-position: 0 0; }
+    .toggle.toggle-icon .toggle-radio {
+      background-image: url("../imgs/toggle/block-on.png");
+      background-position: 62px 0;
+      border-radius: 6px;
+      min-width: 27px;
+      text-align: right; }
+      .toggle.toggle-icon .toggle-radio:first-child {
+        text-align: left; }
+
+
+/* MAIN CSS */
+.todo {
+  background-color: #2c3e50;
+  /*border-radius: 8px 8px 6px 6px;*/
+  color: #6285a8;
+  margin-bottom: 20px;
+}
+
+.todo ul {
+    margin: 0;
+    list-style-type: none;
+}
+
+.todo li {
+    background: #34495e 92% center no-repeat;
+    background-size: 20px 20px;
+    cursor: pointer;
+    margin-top: 2px;
+    padding: 14px 49px 3px 16px;
+    position: relative;
+    margin-top: 1px;
+    margin-bottom: 2px;
+    -webkit-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s;
+    -webkit-backface-visibility: hidden;
+}
+
+.todo li:first-child {
+    margin-top: 0;
+}
+
+.todo li:last-child {
+    /*border-radius: 0 0 6px 6px;*/
+    padding-bottom: 18px;
+}
+
+.todo li:hover {
+    background: transparent 92% center no-repeat;
+    background-size: 20px 20px;
+    color: #3498DB;
+}
+
+.todo li.todo-done .todo-name {
+    color: #3498DB;
+}
+
+.todo-search {
+    background: #3498DB url("../imgs/todo/search.png") 95% center no-repeat;
+    background-size: 16px 16px;
+    /*border-radius: 6px 6px 0 0;*/
+    color: #34495e;
+/*    padding: 19px 25px 20px;*/
+	padding: 9px 16px 10px 16px;
+}
+
+.todo-search-loading {
+    background: #3498DB url("../imgs/loading.gif") 95% center no-repeat;
+}
+
+input.todo-search-field {
+    background: none;
+    border: none;
+    color: #34495e;
+    font-size: 19px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 23px;
+    padding: 5px 0;
+    text-indent: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+input.todo-search-field::-webkit-input-placeholder {
+    color: #34495e;
+}
+
+input.todo-search-field.placeholder {
+    color: #34495e;
+}
+
+.todo-icon {
+    float: left;
+    font-size: 24px;
+    padding: 11px 16px 0 0;
+}
+
+.todo-content {
+    padding-top: 1px;
+    overflow: hidden;
+}
+
+.todo-name {
+    color: white;
+    font-size: 17px;
+    margin: 1px 0 3px;
+    width: 290px;
+}
+.elps {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* added by me */
+.todo-button-area {
+    padding: 0 0 19px 0;
+    height: 46px;
+}
+
+.todo-button-area input {
+    margin-left: 10px;
+}
+
+.settings_btn {
+    font-size: 24px;
+}
+.settings_btn:hover {
+    cursor: pointer;
+    color: #3498DB;
+}
+.settings_btn_16 {
+    font-size: 16px;
+    margin-right: 10px;
+}
+.settings_btn_16a {
+    font-size: 16px;
+    margin-left: 10px;
+    margin-right: 19px;
+}
+.me{
+	position: relative;
+	top: -39px;
+	right: -40px;
+}
+.me:hover{
+	cursor: pointer;
+	color: #3498DB;
+}
+.close_btn {
+    font-size: 24px;
+}
+.divisor{
+	width: 31%;
+	padding: 23px 0 23px 14px;
+	float: left;
+	border-right: 1px solid #34495e;
+	
+	-webkit-transition: 0.25s;
+	-o-transition: 0.25s;
+	transition: 0.25s;
+}
+.divisor:hover{
+	cursor: pointer;
+	color: #3498DB;
+	background-color: #34495e;
+}
+.divisor:last-child{
+	border-right: none;
+}
+.item1{
+	text-align: left;
+	width: 27%;
+	color: #fff;
+}
+.item2{
+	width: 32%;
+	padding-left: 22px;
+	color: #fff;
+}
+
+.item3{
+	text-align: right;
+	width: 28%;
+}
+/* end of added by me */
+
+.mrm, .mhm, .mam {
+  margin-right: 10px; }
