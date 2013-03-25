@@ -139,7 +139,7 @@ var LaterTabs = {
     },
 
     notify: function(title, text){
-        if (LaterTabs.options.notifications){
+        if (!LaterTabs.options || LaterTabs.options.notifications){
             var notification = webkitNotifications.createNotification(
                 chrome.extension.getURL('imgs/icon48.png'),
                 title,
