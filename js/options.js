@@ -8,8 +8,11 @@ function getOptions(callback){
             // notifications on by default
             value = { notifications: true };
             saveOptions(value);
+            callback(value);
         }
-        callback(value.options);
+        else{
+            callback(value.options)
+        }
     });
 }
 
