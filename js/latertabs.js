@@ -2,7 +2,7 @@
  * LaterTabs
  *
  * @license: MIT (check LICENSE file for details)
- * @version: v0.0.1
+ * @version: v0.0.2
  *
  */
 
