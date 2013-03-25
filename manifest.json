@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name":  "LaterTabs",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "description": "Save for tabs for later reading",
     "browser_action": {
         "default_icon": "imgs/icon128.png",
