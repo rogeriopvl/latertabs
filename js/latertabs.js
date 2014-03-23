@@ -140,12 +140,12 @@ var LaterTabs = {
 
     notify: function(title, text){
         if (!LaterTabs.options || LaterTabs.options.notifications){
-            var notification = webkitNotifications.createNotification(
-                chrome.extension.getURL('imgs/icon48.png'),
-                title,
-                text
-            );
-            notification.show();
+            chrome.notifications.create('', {
+                type: 'basic',
+                iconUrl: chrome.extension.getURL('imgs/icon48.png'),
+                title: title,
+                message: text
+            }, function (notifID) {});
         }
     },
 
